@@ -20,6 +20,7 @@ body {
   animation: gradientMove 12s ease infinite;
 }
 
+/* readability overlay */
 body::before {
   content: "";
   position: fixed;
@@ -53,7 +54,7 @@ body::before {
   50% { transform: translateY(10px); }
 }
 
-/* main box */
+/* box */
 .box {
   position: absolute;
   top: 50%;
@@ -72,10 +73,14 @@ body::before {
   background: rgba(255,255,255,0.14);
   border-radius: 20px;
   backdrop-filter: blur(16px);
+
   z-index: 2;
 }
 
-h1 { margin: 0; font-size: 26px; }
+h1 {
+  margin: 0;
+  font-size: 26px;
+}
 
 #typing {
   min-height: 40px;
@@ -83,7 +88,7 @@ h1 { margin: 0; font-size: 26px; }
   color: #ffe4f1;
 }
 
-/* buttons */
+/* buttons BIGGER for phone */
 button {
   padding: 14px 22px;
   font-size: 18px;
@@ -95,10 +100,15 @@ button {
   margin: 0 auto;
 }
 
-#yes { background: #ffb6c1; }
-#no { background: #ffffff; }
+#yes {
+  background: #ffb6c1;
+}
 
-/* corner cats */
+#no {
+  background: #ffffff;
+}
+
+/* cats */
 .corner-cat, .rose-cat {
   position: fixed;
   font-size: 14px;
@@ -110,10 +120,18 @@ button {
   z-index: 2;
 }
 
-.corner-cat { bottom: 15px; left: 15px; }
-.rose-cat { bottom: 15px; right: 15px; text-align:center; }
+.corner-cat {
+  bottom: 15px;
+  left: 15px;
+}
 
-/* floating messages */
+.rose-cat {
+  bottom: 15px;
+  right: 15px;
+  text-align: center;
+}
+
+/* floating msg */
 .float-msg {
   position: absolute;
   font-size: 16px;
@@ -129,21 +147,22 @@ button {
   100% { transform: translateY(-120px); opacity: 0; }
 }
 
-/* 🌸 PETALS */
+/* petals */
 .petal {
-  position: fixed;
+  position: absolute;
   top: -20px;
-  font-size: 22px;
+  width: 18px;
+  height: 18px;
+  background-image: url("https://pngimg.com/uploads/petals/petals_PNG114.png");
+  background-size: cover;
   opacity: 0.9;
-  z-index: 1;
-  pointer-events: none;
   animation: fall linear forwards;
 }
 
 @keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  0% { transform: translateY(-10vh); opacity: 0; }
   10% { opacity: 1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  100% { transform: translateY(110vh); opacity: 0; }
 }
 </style>
 </head>
@@ -190,7 +209,7 @@ const sad = document.getElementById("sadSound");
 
 document.getElementById("musicBtn").onclick = () => music.play();
 
-/* typing effect */
+/* typing */
 const text = "will you give me another chance? 💔";
 let i = 0;
 
@@ -202,7 +221,7 @@ function type(){
 }
 type();
 
-/* YES button */
+/* YES */
 yes.onclick = () => {
   document.getElementById("box").innerHTML = `
     <div style="font-size:20px; line-height:1.6;">
@@ -218,7 +237,7 @@ yes.onclick = () => {
   sad.play();
 };
 
-/* NO button */
+/* NO button runaway */
 const noTexts = [
 "💔 please don’t say no...",
 "🥺 think about it...",
@@ -240,19 +259,20 @@ no.onclick = () => {
   sad.play();
 };
 
-/* 🌸 FALLING PETALS (WORKING GUARANTEED) */
+/* petals */
 setInterval(() => {
   const p = document.createElement("div");
   p.className = "petal";
-  p.innerText = "🌸";
+
+  const size = 12 + Math.random() * 18;
+  p.style.width = size + "px";
+  p.style.height = size + "px";
 
   p.style.left = Math.random() * 100 + "vw";
-  p.style.fontSize = (16 + Math.random() * 20) + "px";
-  p.style.animationDuration = (4 + Math.random() * 5) + "s";
+  p.style.animationDuration = (5 + Math.random() * 6) + "s";
 
   document.body.appendChild(p);
-
-  setTimeout(() => p.remove(), 9000);
+  setTimeout(() => p.remove(), 12000);
 }, 120);
 
 /* floating messages */
