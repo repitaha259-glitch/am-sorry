@@ -15,17 +15,16 @@ body {
 
   background: linear-gradient(-45deg, #ffb6c1, #ff69b4, #6a0dad, #2a1230);
   background-size: 400% 400%;
-  animation: gradientMove 10s ease infinite;
+  animation: gradientMove 12s ease infinite;
 }
 
-/* background animation */
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* moon */
+/* 🌙 moon */
 .moon {
   position: absolute;
   top: 40px;
@@ -35,7 +34,7 @@ body {
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #fff, #f5f5f5, #cfcfcf);
   box-shadow: 0 0 40px rgba(255,255,255,0.7);
-  animation: moonFloat 6s ease-in-out infinite;
+  animation: moonFloat 8s ease-in-out infinite;
 }
 
 @keyframes moonFloat {
@@ -43,28 +42,11 @@ body {
   50% { transform: translateY(10px); }
 }
 
-/* floating particles */
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-10vh); }
-}
-
-/* petals */
+/* 🌸 petals */
 .petal {
   position: absolute;
   top: -10px;
   font-size: 18px;
-  opacity: 0.7;
   animation: fall linear infinite;
 }
 
@@ -74,24 +56,29 @@ body {
   100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
-/* cats */
-.cat {
+/* 💧 droplets */
+.drop {
   position: absolute;
-  bottom: 10%;
-  animation: walk 12s linear infinite;
+  width: 6px;
+  height: 14px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: drip linear forwards;
 }
 
-@keyframes walk {
-  from { transform: translateX(-10vw); }
-  to { transform: translateX(110vw); }
+@keyframes drip {
+  from { transform: translateY(-10px); opacity: 0; }
+  10% { opacity: 1; }
+  to { transform: translateY(120vh); opacity: 0; }
 }
 
-/* box */
+/* 💎 box */
 .box {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   width: 85%;
   max-width: 520px;
 
@@ -105,29 +92,18 @@ body {
 
   background: rgba(255,255,255,0.12);
   border-radius: 20px;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
 
   animation: breathe 6s ease-in-out infinite;
   overflow: hidden;
 }
 
-/* breathing */
 @keyframes breathe {
   0%,100% { transform: translate(-50%, -50%) scale(1); }
   50% { transform: translate(-50%, -52%) scale(1.02); }
 }
 
-/* fog */
-.box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18), transparent 40%),
-              radial-gradient(circle at 70% 60%, rgba(255,255,255,0.12), transparent 45%);
-  filter: blur(6px);
-}
-
-/* moonlight sweep */
+/* shine */
 .box::after {
   content: "";
   position: absolute;
@@ -145,20 +121,11 @@ body {
   to { left: 130%; }
 }
 
-.box > * {
-  position: relative;
-  z-index: 1;
-}
+.box > * { position: relative; z-index: 1; }
 
-h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-#typing {
-  min-height: 30px;
-  color: #fff0f5;
-}
+/* text */
+h1 { margin: 0; font-size: 24px; }
+#typing { min-height: 30px; color: #fff0f5; }
 
 button {
   padding: 10px 18px;
@@ -170,20 +137,71 @@ button {
 #yes { background: #ffb6c1; }
 #no { background: #fff; }
 
-/* droplets */
-.drop {
+/* 🌫️ fog */
+.box::before {
+  content: "";
   position: absolute;
-  width: 6px;
-  height: 14px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
-  animation: drip linear forwards;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.12), transparent 45%);
+  filter: blur(6px);
 }
 
-@keyframes drip {
-  from { transform: translateY(-10px); opacity: 0; }
-  10% { opacity: 1; }
-  to { transform: translateY(120vh); opacity: 0; }
+/* 🌸 fade in */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.2s forwards;
+}
+.fade1 { animation-delay: 0.3s; }
+.fade2 { animation-delay: 0.8s; }
+.fade3 { animation-delay: 1.4s; }
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* 🐱 cat */
+.corner-cat, .rose-cat {
+  position: fixed;
+  padding: 10px;
+  font-size: 12px;
+  width: 220px;
+  background: rgba(255,255,255,0.10);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  animation: float 5s ease-in-out infinite;
+}
+
+.corner-cat {
+  bottom: 20px;
+  left: 20px;
+}
+
+.rose-cat {
+  bottom: 20px;
+  right: 20px;
+  text-align: center;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* eyes blink */
+.eye {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: blink 3s infinite;
+}
+
+@keyframes blink {
+  0%,92%,100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
 }
 </style>
 </head>
@@ -191,6 +209,20 @@ button {
 <body>
 
 <div class="moon"></div>
+
+<!-- 🐱 apology cat -->
+<div class="corner-cat">
+  🐱💔<br>
+  forgive this little fella boi..<br>
+  she is very sorry for hurting u..<br>
+  i have scolded him 😿
+</div>
+
+<!-- 🐱🌹 rose cat -->
+<div class="rose-cat">
+  🐱🌹<br>
+  take these roses… for you 💖
+</div>
 
 <audio id="bgmusic" loop>
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6c1b2.mp3">
@@ -202,14 +234,14 @@ button {
 
 <button id="musicBtn">🎵 Play Music</button>
 
-<div class="box">
+<div class="box fade-in fade1">
 
-<h1 class="fade-in">Will you give me another chance? 💔</h1>
+<h1>Will you give me another chance? 💔</h1>
 
-<p id="typing"></p>
+<p id="typing" class="fade-in fade2"></p>
 
-<button id="yes">Yes ❤️</button>
-<button id="no">No 😢</button>
+<button id="yes" class="fade-in fade3">Yes ❤️</button>
+<button id="no" class="fade-in fade3">No 😢</button>
 
 <h2 id="msg"></h2>
 
@@ -218,7 +250,8 @@ button {
 <script>
 
 const music = document.getElementById("bgmusic");
-const sadSound = document.getElementById("sadSound");
+const sad = document.getElementById("sadSound");
+
 document.getElementById("musicBtn").onclick = () => music.play();
 
 /* typing */
@@ -231,48 +264,37 @@ setTimeout(type,60);
 }}
 type();
 
-const yesBtn = document.getElementById("yes");
-const noBtn = document.getElementById("no");
-const msg = document.getElementById("msg");
+/* YES */
+yes.onclick = () => {
+document.body.style.background =
+"linear-gradient(120deg,#ff9a9e,#fad0c4,#fff1a8)";
 
-/* YES grow + clear glass feel */
-let scale = 1;
-setInterval(()=>{
-if(scale<3){
-scale+=0.05;
-yesBtn.style.transform=`scale(${scale})`;
-document.querySelector(".box").style.backdropFilter="blur(6px)";
-}
-},2000);
+document.querySelector(".box").innerHTML =
+"🌅 I promise this time I’m gonna give it my all<br>and I’m sorry for all the hurt I caused you 💖";
 
-/* YES action */
-yesBtn.onclick = () => {
-msg.innerHTML =
-"💖 I promise this time I’m gonna give it my all and I’m sorry for all the hurt I caused you.";
-yesBtn.style.display="none";
-noBtn.style.display="none";
-document.getElementById("typing").style.display="none";
+yes.style.display="none";
+no.style.display="none";
 };
 
-/* NO loop messages */
+/* NO loop */
 const noTexts=[
-"💔 please think about it...",
-"🥺 one more chance...",
+"💔 please don’t say no...",
+"🥺 think about it...",
 "💖 I’ll change...",
-"🙏 don’t say no yet..."
+"🙏 one more chance..."
 ];
 let n=0;
 
-noBtn.onclick=()=>{
-noBtn.innerText=noTexts[n];
+no.onclick = () => {
+no.innerText = noTexts[n];
 n=(n+1)%noTexts.length;
 
-noBtn.style.position="absolute";
-noBtn.style.left=Math.random()*80+"vw";
-noBtn.style.top=Math.random()*80+"vh";
+no.style.position="absolute";
+no.style.left=Math.random()*80+"vw";
+no.style.top=Math.random()*80+"vh";
 
-sadSound.currentTime=0;
-sadSound.play();
+sad.currentTime=0;
+sad.play();
 };
 
 /* petals */
@@ -294,7 +316,7 @@ d.style.left=Math.random()*100+"%";
 d.style.animationDuration=(3+Math.random()*4)+"s";
 document.querySelector(".box").appendChild(d);
 setTimeout(()=>d.remove(),8000);
-},400);
+},500);
 
 </script>
 
