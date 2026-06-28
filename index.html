@@ -62,7 +62,10 @@ body {
   z-index: 2;
 }
 
-h1 { margin: 0; font-size: 22px; }
+h1 {
+  margin: 0;
+  font-size: 22px;
+}
 
 #typing {
   min-height: 30px;
@@ -96,25 +99,26 @@ button {
 .corner-cat { left: 20px; }
 .rose-cat { right: 20px; }
 
-/* 💖 petals */
+/* 🌸 PETALS (FIXED - ALWAYS VISIBLE) */
 .petal {
   position: absolute;
   top: -20px;
-  font-size: 18px;
+  font-size: 22px;
   pointer-events: none;
+  z-index: 9999;
+
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
+
   animation: fall linear forwards;
-  z-index: 1;
 }
 
 @keyframes fall {
   0% {
     transform: translateY(-10vh) rotate(0deg);
-    opacity: 0;
   }
-  10% { opacity: 1; }
   100% {
     transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
   }
 }
 </style>
@@ -127,10 +131,6 @@ button {
 <div class="corner-cat">🐱💔 I’m sorry…</div>
 <div class="rose-cat">🐱🌹 roses for you 💖</div>
 
-<audio id="sadSound">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b9f3b8d8a.mp3">
-</audio>
-
 <div class="box" id="box">
   <h1>Will you give me another chance? 💔</h1>
   <p id="typing"></p>
@@ -141,9 +141,7 @@ button {
 
 <script>
 
-const sad = document.getElementById("sadSound");
-
-/* typing */
+/* typing effect */
 const text = "will you give me another chance? 💔";
 let i = 0;
 
@@ -159,12 +157,12 @@ type();
 document.getElementById("yes").onclick = () => {
   document.getElementById("box").innerHTML = `
     <h2>🌸 Thank you…</h2>
-    <p>I promise I’ll do better 💖</p>
+    <p>I promise I’ll do better this time 💖</p>
   `;
-  sad.play();
 };
 
-/* NO runaway (safe) */
+/* NO button runaway */
+const noBtn = document.getElementById("no");
 const noTexts = [
 "💔 please don’t say no...",
 "🥺 think again...",
@@ -173,7 +171,6 @@ const noTexts = [
 ];
 
 let n = 0;
-const noBtn = document.getElementById("no");
 
 noBtn.onclick = () => {
   noBtn.innerText = noTexts[n];
@@ -185,19 +182,16 @@ noBtn.onclick = () => {
   noBtn.style.position = "absolute";
   noBtn.style.left = Math.random() * maxX + "px";
   noBtn.style.top = Math.random() * maxY + "px";
-
-  sad.currentTime = 0;
-  sad.play();
 };
 
-/* 🌸 FALLING PETALS */
+/* 🌸 FALLING PETALS (WORKING GUARANTEED) */
 function createPetal() {
   const p = document.createElement("div");
   p.className = "petal";
   p.innerText = "🌸";
 
   p.style.left = Math.random() * 100 + "vw";
-  p.style.fontSize = (14 + Math.random() * 12) + "px";
+  p.style.fontSize = (16 + Math.random() * 20) + "px";
   p.style.animationDuration = (4 + Math.random() * 4) + "s";
 
   document.body.appendChild(p);
@@ -205,7 +199,7 @@ function createPetal() {
   setTimeout(() => p.remove(), 9000);
 }
 
-setInterval(createPetal, 200);
+setInterval(createPetal, 120);
 
 </script>
 
