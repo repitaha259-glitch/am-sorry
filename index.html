@@ -72,7 +72,7 @@ body {
   to { transform: translateY(120vh); opacity: 0; }
 }
 
-/* 💎 box (FIXED SHAKING) */
+/* 💎 BOX (FIXED SHAKING) */
 .box {
   position: absolute;
   top: 50%;
@@ -97,12 +97,18 @@ body {
   animation: breathe 6s ease-in-out infinite;
 
   will-change: transform;
+  transform-origin: center;
   overflow: hidden;
 }
 
+/* FIXED BREATHING (NO SHAKE) */
 @keyframes breathe {
-  0%,100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -52%) scale(1.02); }
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.02);
+  }
 }
 
 /* shine */
@@ -125,6 +131,17 @@ body {
 
 .box > * { position: relative; z-index: 1; }
 
+/* fog */
+.box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.12), transparent 45%);
+  filter: blur(6px);
+}
+
 /* text */
 h1 { margin: 0; font-size: 24px; }
 #typing { min-height: 30px; color: #fff0f5; }
@@ -138,17 +155,6 @@ button {
 
 #yes { background: #ffb6c1; }
 #no { background: #fff; }
-
-/* 🌫️ fog */
-.box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18), transparent 40%),
-    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.12), transparent 45%);
-  filter: blur(6px);
-}
 
 /* 🐱 cats */
 .corner-cat, .rose-cat {
@@ -183,6 +189,43 @@ button {
   0% { transform: translateY(0); opacity: 0; }
   10% { opacity: 1; }
   100% { transform: translateY(-120px); opacity: 0; }
+}
+
+/* 📱 MOBILE FIX */
+@media (max-width: 768px) {
+
+  .box {
+    width: 90%;
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  #typing {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .moon {
+    width: 60px;
+    height: 60px;
+    top: 15px;
+    right: 15px;
+  }
+
+  .corner-cat,
+  .rose-cat {
+    width: 160px;
+    font-size: 10px;
+    padding: 8px;
+  }
 }
 </style>
 </head>
@@ -273,28 +316,7 @@ sad.currentTime = 0;
 sad.play();
 };
 
-/* petals */
-setInterval(() => {
-const p = document.createElement("div");
-p.className = "petal";
-p.innerHTML = "🌸";
-p.style.left = Math.random() * 100 + "vw";
-p.style.animationDuration = (5 + Math.random() * 5) + "s";
-document.body.appendChild(p);
-setTimeout(() => p.remove(), 10000);
-}, 300);
-
-/* droplets */
-setInterval(() => {
-const d = document.createElement("div");
-d.className = "drop";
-d.style.left = Math.random() * 100 + "%";
-d.style.animationDuration = (3 + Math.random() * 4) + "s";
-document.querySelector(".box").appendChild(d);
-setTimeout(() => d.remove(), 8000);
-}, 500);
-
-/* 😢 floating sorry messages */
+/* floating sorry messages */
 function spawnMsg(){
 const m = document.createElement("div");
 m.className = "float-msg";
