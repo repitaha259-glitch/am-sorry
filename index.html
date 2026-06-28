@@ -16,6 +16,7 @@ body {
   background: linear-gradient(-45deg, #ffb6c1, #ff69b4, #6a0dad, #2a1230);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
+  transition: all 1s ease;
 }
 
 @keyframes gradientMove {
@@ -72,7 +73,7 @@ body {
   to { transform: translateY(120vh); opacity: 0; }
 }
 
-/* 💎 BOX (FIXED SHAKING) */
+/* 💎 BOX (NO SHAKE) */
 .box {
   position: absolute;
   top: 50%;
@@ -95,15 +96,12 @@ body {
   backdrop-filter: blur(14px);
 
   animation: breathe 6s ease-in-out infinite;
-
   will-change: transform;
-  transform-origin: center;
   overflow: hidden;
 }
 
-/* FIXED BREATHING (NO SHAKE) */
 @keyframes breathe {
-  0%, 100% {
+  0%,100% {
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
@@ -142,7 +140,7 @@ body {
   filter: blur(6px);
 }
 
-/* text */
+/* TEXT */
 h1 { margin: 0; font-size: 24px; }
 #typing { min-height: 30px; color: #fff0f5; }
 
@@ -156,16 +154,27 @@ button {
 #yes { background: #ffb6c1; }
 #no { background: #fff; }
 
-/* 🐱 cats */
+/* 🐱 CATS */
 .corner-cat, .rose-cat {
   position: fixed;
-  padding: 10px;
-  font-size: 12px;
-  width: 220px;
-  background: rgba(255,255,255,0.10);
-  border-radius: 14px;
-  backdrop-filter: blur(10px);
+  padding: 14px 16px;
+  width: 240px;
+
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 600;
+
+  color: white;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+
+  backdrop-filter: blur(12px);
   animation: float 5s ease-in-out infinite;
+
+  box-shadow: 0 0 25px rgba(255, 182, 193, 0.25);
 }
 
 .corner-cat { bottom: 20px; left: 20px; }
@@ -176,13 +185,18 @@ button {
   50% { transform: translateY(-6px); }
 }
 
-/* 😢 floating messages */
+/* 💔 FLOATING MSG */
 .float-msg {
   position: absolute;
   font-size: 16px;
-  opacity: 0.8;
+  font-weight: 700;
+  opacity: 0.95;
+  color: white;
+  text-shadow: 0 0 10px rgba(0,0,0,0.6);
   animation: floatMsg 5s linear forwards;
   pointer-events: none;
+  max-width: 220px;
+  text-align: center;
 }
 
 @keyframes floatMsg {
@@ -191,7 +205,7 @@ button {
   100% { transform: translateY(-120px); opacity: 0; }
 }
 
-/* 📱 MOBILE FIX */
+/* 📱 MOBILE */
 @media (max-width: 768px) {
 
   .box {
@@ -199,14 +213,9 @@ button {
     padding: 20px 16px;
   }
 
-  h1 {
-    font-size: 18px;
-    line-height: 1.4;
-  }
+  h1 { font-size: 18px; }
 
-  #typing {
-    font-size: 14px;
-  }
+  #typing { font-size: 14px; }
 
   button {
     font-size: 14px;
@@ -235,23 +244,14 @@ button {
 <div class="moon"></div>
 
 <div class="corner-cat">
-🐱💔 forgive this little fella boi..<br>
-she is very sorry 😿
+🐱💔 he is very sorry...<br>
+me catto has told/scolded him<br>
+not to do this ever again 😿
 </div>
 
 <div class="rose-cat">
 🐱🌹 take these roses… 💖
 </div>
-
-<audio id="bgmusic" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6c1b2.mp3">
-</audio>
-
-<audio id="sadSound">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b9f3b8d8a.mp3">
-</audio>
-
-<button id="musicBtn">🎵 Play Music</button>
 
 <div class="box">
 
@@ -261,20 +261,13 @@ she is very sorry 😿
 <button id="yes">Yes ❤️</button>
 <button id="no">No 😢</button>
 
-<h2 id="msg"></h2>
-
 </div>
 
 <script>
 
-const music = document.getElementById("bgmusic");
-const sad = document.getElementById("sadSound");
-
-document.getElementById("musicBtn").onclick = () => music.play();
-
-/* typing */
 const text = "will you give me another chance? 💔";
 let i = 0;
+
 function type(){
 if(i < text.length){
 document.getElementById("typing").innerHTML += text[i++];
@@ -282,24 +275,34 @@ setTimeout(type,60);
 }}
 type();
 
-/* YES */
+/* YES FIXED READABILITY */
 yes.onclick = () => {
+
 document.body.style.background =
 "linear-gradient(120deg,#ff9a9e,#fad0c4,#fff1a8)";
 
-document.querySelector(".box").innerHTML =
-"🌅 I promise this time I’m gonna give it my all<br>and I’m sorry for all the hurt I caused you 💖";
+document.body.style.color = "#2b2b2b";
+
+const box = document.querySelector(".box");
+box.style.background = "rgba(255,255,255,0.75)";
+box.style.backdropFilter = "blur(10px)";
+box.style.color = "#2b2b2b";
+
+box.innerHTML =
+"🌅 I promise this time I’m gonna give it my all<br><br>" +
+"💖 I’m really sorry for all the hurt I caused you<br><br>" +
+"🌸 Thank you for giving me a chance";
 
 yes.style.display="none";
 no.style.display="none";
 };
 
-/* NO loop */
+/* NO LOOP */
 const noTexts = [
-"💔 please don’t say no...",
-"🥺 think about it...",
-"💖 I’ll change...",
-"🙏 one more chance..."
+"think about it again... 🥺",
+"please forgive me... 😢",
+"don’t leave me like this... 💔",
+"one more chance please... 💖"
 ];
 
 let n = 0;
@@ -311,27 +314,30 @@ n = (n + 1) % noTexts.length;
 no.style.position = "absolute";
 no.style.left = Math.random() * 80 + "vw";
 no.style.top = Math.random() * 80 + "vh";
-
-sad.currentTime = 0;
-sad.play();
 };
 
-/* floating sorry messages */
+/* floating msgs */
 function spawnMsg(){
 const m = document.createElement("div");
 m.className = "float-msg";
 
-const texts = ["sorry 😢", "I’m really sorry 😭"];
+const texts = [
+"💔 forgive this little fella...",
+"😢 he has hurted you but he is sorry for everything...",
+"🥺 please don’t leave...",
+"💖 one more chance please..."
+];
+
 m.innerText = texts[Math.floor(Math.random() * texts.length)];
 
-m.style.left = Math.random() * 80 + "vw";
-m.style.top = (60 + Math.random() * 30) + "vh";
+m.style.left = Math.random() * 70 + "vw";
+m.style.top = (50 + Math.random() * 30) + "vh";
 
 document.body.appendChild(m);
 setTimeout(() => m.remove(), 5000);
 }
 
-setInterval(spawnMsg, 2500);
+setInterval(spawnMsg, 2200);
 
 </script>
 
