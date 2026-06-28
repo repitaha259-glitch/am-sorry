@@ -16,7 +16,6 @@ body {
   background: linear-gradient(-45deg, #ffb6c1, #ff69b4, #6a0dad, #2a1230);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
-  transition: all 1s ease;
 }
 
 @keyframes gradientMove {
@@ -25,7 +24,7 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* 🌙 moon */
+/* 🌙 MOON */
 .moon {
   position: absolute;
   top: 40px;
@@ -43,7 +42,7 @@ body {
   50% { transform: translateY(10px); }
 }
 
-/* 🌸 petals */
+/* 🌸 PETALS */
 .petal {
   position: absolute;
   top: -10px;
@@ -57,7 +56,7 @@ body {
   100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
-/* 💧 droplets */
+/* 💧 DROPS */
 .drop {
   position: absolute;
   width: 6px;
@@ -73,7 +72,7 @@ body {
   to { transform: translateY(120vh); opacity: 0; }
 }
 
-/* 💎 BOX (NO SHAKE) */
+/* 💎 BOX */
 .box {
   position: absolute;
   top: 50%;
@@ -275,23 +274,28 @@ setTimeout(type,60);
 }}
 type();
 
-/* YES FIXED READABILITY */
+/* YES FIXED */
 yes.onclick = () => {
 
 document.body.style.background =
 "linear-gradient(120deg,#ff9a9e,#fad0c4,#fff1a8)";
 
-document.body.style.color = "#2b2b2b";
-
 const box = document.querySelector(".box");
-box.style.background = "rgba(255,255,255,0.75)";
-box.style.backdropFilter = "blur(10px)";
-box.style.color = "#2b2b2b";
 
-box.innerHTML =
-"🌅 I promise this time I’m gonna give it my all<br><br>" +
-"💖 I’m really sorry for all the hurt I caused you<br><br>" +
-"🌸 Thank you for giving me a chance";
+box.innerHTML = `
+  <div style="
+    background: rgba(255,255,255,0.85);
+    color: #2b2b2b;
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    line-height: 1.6;
+  ">
+    🌅 I promise this time I’m gonna give it my all<br><br>
+    💖 I’m really sorry for all the hurt I caused you<br><br>
+    🌸 Thank you for giving me a chance
+  </div>
+`;
 
 yes.style.display="none";
 no.style.display="none";
