@@ -53,7 +53,7 @@ body::before {
   50% { transform: translateY(10px); }
 }
 
-/* 🌸 PETALS (GLOW VERSION) */
+/* 🌸 PETALS */
 .petal {
   position: absolute;
   top: -20px;
@@ -122,9 +122,7 @@ body::before {
   backdrop-filter: blur(16px);
 
   animation: breathe 6s ease-in-out infinite;
-
   z-index: 2;
-  overflow: hidden;
 }
 
 @keyframes breathe {
@@ -132,16 +130,30 @@ body::before {
   50% { transform: translate(-50%, -52%) scale(1.02); }
 }
 
-.box > * { position: relative; z-index: 1; }
+/* 🔥 TEXT FIX (BIG + CLEAR) */
+h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.2;
+}
 
-h1 { margin: 0; font-size: 24px; }
-#typing { min-height: 30px; color: #ffe4f1; }
+#typing {
+  min-height: 40px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffe4f1;
+}
 
+/* 🔘 BUTTON FIX */
 button {
-  padding: 10px 18px;
+  padding: 14px 26px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  min-width: 120px;
+  margin: 5px;
 }
 
 #yes { background: #ffb6c1; }
@@ -184,10 +196,26 @@ button {
   100% { transform: translateY(-120px); opacity: 0; }
 }
 
-/* success text */
-.success {
-  font-size: 18px;
-  line-height: 1.6;
+/* 📱 MOBILE FIX */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 26px;
+  }
+
+  #typing {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px 20px;
+    min-width: 100px;
+  }
+
+  .box {
+    width: 90%;
+    padding: 25px 15px;
+  }
 }
 </style>
 </head>
@@ -248,7 +276,7 @@ type();
 /* YES */
 yes.onclick = () => {
   document.getElementById("box").innerHTML = `
-    <div class="success">
+    <div style="font-size:18px;line-height:1.6;">
       🌸 thank you…<br><br>
       💖 I promise I’ll do better this time<br>
       and never hurt you again
@@ -283,24 +311,19 @@ no.onclick = () => {
   sad.play();
 };
 
-/* 🌸 glowing petals */
+/* 🌸 petals */
 setInterval(() => {
   const p = document.createElement("div");
   p.className = "petal";
 
-  const size = 12 + Math.random() * 18;
-  p.style.width = size + "px";
-  p.style.height = size + "px";
-
   p.style.left = Math.random() * 100 + "vw";
   p.style.animationDuration = (5 + Math.random() * 6) + "s";
-  p.style.transform = `rotate(${Math.random() * 360}deg)`;
 
   document.body.appendChild(p);
   setTimeout(() => p.remove(), 12000);
-}, 120);
+}, 200);
 
-/* floating messages */
+/* floating msgs */
 function spawnMsg(){
   const m = document.createElement("div");
   m.className = "float-msg";
