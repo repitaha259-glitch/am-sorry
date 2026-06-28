@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Will you give me another chance?</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
@@ -19,15 +21,6 @@ body {
   animation: gradientMove 12s ease infinite;
 }
 
-/* readability overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.25);
-  z-index: 0;
-}
-
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -37,67 +30,13 @@ body::before {
 /* 🌙 moon */
 .moon {
   position: absolute;
-  top: 40px;
-  right: 60px;
-  width: 95px;
-  height: 95px;
+  top: 30px;
+  right: 30px;
+  width: 85px;
+  height: 85px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff, #f5f5f5, #cfcfcf);
-  box-shadow: 0 0 40px rgba(255,255,255,0.7);
-  animation: moonFloat 8s ease-in-out infinite;
-  z-index: 2;
-}
-
-@keyframes moonFloat {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
-}
-
-/* 🌸 PETALS (GLOW VERSION) */
-.petal {
-  position: absolute;
-  top: -20px;
-  width: 18px;
-  height: 18px;
-  background-image: url("https://pngimg.com/uploads/petals/petals_PNG114.png");
-  background-size: cover;
-  opacity: 0.9;
-
-  filter: drop-shadow(0 0 6px rgba(255, 182, 193, 0.9))
-          drop-shadow(0 0 12px rgba(255, 105, 180, 0.6));
-
-  animation: fall linear forwards;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-10vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% { opacity: 1; }
-  50% {
-    transform: translateY(50vh) translateX(40px) rotate(180deg);
-  }
-  100% {
-    transform: translateY(110vh) translateX(-40px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* 💧 droplets */
-.drop {
-  position: absolute;
-  width: 6px;
-  height: 14px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
-  animation: drip linear forwards;
-}
-
-@keyframes drip {
-  from { transform: translateY(-10px); opacity: 0; }
-  10% { opacity: 1; }
-  to { transform: translateY(120vh); opacity: 0; }
+  background: radial-gradient(circle, #fff, #ddd);
+  box-shadow: 0 0 30px rgba(255,255,255,0.6);
 }
 
 /* 💎 box */
@@ -106,42 +45,37 @@ body::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 85%;
+  width: 90%;
   max-width: 520px;
 
-  padding: 30px 20px;
+  padding: 25px;
   text-align: center;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
 
-  background: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.12);
   border-radius: 20px;
-  backdrop-filter: blur(16px);
-
-  animation: breathe 6s ease-in-out infinite;
-
+  backdrop-filter: blur(14px);
   z-index: 2;
-  overflow: hidden;
 }
 
-@keyframes breathe {
-  0%,100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -52%) scale(1.02); }
+h1 { margin: 0; font-size: 22px; }
+
+#typing {
+  min-height: 30px;
 }
 
-.box > * { position: relative; z-index: 1; }
-
-h1 { margin: 0; font-size: 24px; }
-#typing { min-height: 30px; color: #ffe4f1; }
-
+/* 🔘 buttons */
 button {
-  padding: 10px 18px;
+  padding: 14px 22px;
   border: none;
   border-radius: 25px;
+  font-size: 16px;
   cursor: pointer;
+  min-width: 140px;
 }
 
 #yes { background: #ffb6c1; }
@@ -150,44 +84,38 @@ button {
 /* 🐱 cats */
 .corner-cat, .rose-cat {
   position: fixed;
-  padding: 12px;
-  font-size: 13px;
-  width: 220px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 14px;
-  backdrop-filter: blur(12px);
-  animation: float 5s ease-in-out infinite;
+  bottom: 20px;
+  width: 200px;
+  padding: 10px;
+  font-size: 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
   z-index: 2;
 }
 
-.corner-cat { bottom: 20px; left: 20px; }
-.rose-cat { bottom: 20px; right: 20px; text-align: center; }
+.corner-cat { left: 20px; }
+.rose-cat { right: 20px; }
 
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* 😢 floating msgs */
-.float-msg {
+/* 💖 petals */
+.petal {
   position: absolute;
-  font-size: 16px;
-  opacity: 0.85;
-  animation: floatMsg 5s linear forwards;
+  top: -20px;
+  font-size: 18px;
   pointer-events: none;
+  animation: fall linear forwards;
   z-index: 1;
 }
 
-@keyframes floatMsg {
-  0% { transform: translateY(0); opacity: 0; }
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
   10% { opacity: 1; }
-  100% { transform: translateY(-120px); opacity: 0; }
-}
-
-/* success text */
-.success {
-  font-size: 18px;
-  line-height: 1.6;
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 </style>
 </head>
@@ -196,122 +124,88 @@ button {
 
 <div class="moon"></div>
 
-<div class="corner-cat">
-🐱💔 forgive this little fella boi..<br>
-he is very sorry 😿
-</div>
-
-<div class="rose-cat">
-🐱🌹 take these roses… 💖
-</div>
-
-<audio id="bgmusic" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6c1b2.mp3">
-</audio>
+<div class="corner-cat">🐱💔 I’m sorry…</div>
+<div class="rose-cat">🐱🌹 roses for you 💖</div>
 
 <audio id="sadSound">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b9f3b8d8a.mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b9f3b8d8a.mp3">
 </audio>
 
-<button id="musicBtn" style="position:fixed;top:15px;left:15px;z-index:3;">
-🎵 Play Music
-</button>
-
 <div class="box" id="box">
+  <h1>Will you give me another chance? 💔</h1>
+  <p id="typing"></p>
 
-<h1>Will you give me another chance? 💔</h1>
-<p id="typing"></p>
-
-<button id="yes">Yes ❤️</button>
-<button id="no">No 😢</button>
-
+  <button id="yes">Yes ❤️</button>
+  <button id="no">No 😢</button>
 </div>
 
 <script>
 
-const music = document.getElementById("bgmusic");
 const sad = document.getElementById("sadSound");
-
-document.getElementById("musicBtn").onclick = () => music.play();
 
 /* typing */
 const text = "will you give me another chance? 💔";
 let i = 0;
+
 function type(){
   if(i < text.length){
     document.getElementById("typing").innerHTML += text[i++];
-    setTimeout(type,60);
+    setTimeout(type, 60);
   }
 }
 type();
 
 /* YES */
-yes.onclick = () => {
+document.getElementById("yes").onclick = () => {
   document.getElementById("box").innerHTML = `
-    <div class="success">
-      🌸 thank you…<br><br>
-      💖 I promise I’ll do better this time<br>
-      and never hurt you again
-    </div>
+    <h2>🌸 Thank you…</h2>
+    <p>I promise I’ll do better 💖</p>
   `;
-
-  document.body.style.background =
-  "linear-gradient(120deg,#ff9a9e,#fad0c4,#fff1a8)";
-
   sad.play();
 };
 
-/* NO button runaway */
+/* NO runaway (safe) */
 const noTexts = [
 "💔 please don’t say no...",
-"🥺 think about it...",
+"🥺 think again...",
 "💖 I’ll change...",
 "🙏 one more chance..."
 ];
 
 let n = 0;
+const noBtn = document.getElementById("no");
 
-no.onclick = () => {
-  no.innerText = noTexts[n];
+noBtn.onclick = () => {
+  noBtn.innerText = noTexts[n];
   n = (n + 1) % noTexts.length;
 
-  no.style.position = "absolute";
-  no.style.left = Math.random() * 80 + "vw";
-  no.style.top = Math.random() * 80 + "vh";
+  const maxX = window.innerWidth - 160;
+  const maxY = window.innerHeight - 120;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
 
   sad.currentTime = 0;
   sad.play();
 };
 
-/* 🌸 glowing petals */
-setInterval(() => {
+/* 🌸 FALLING PETALS */
+function createPetal() {
   const p = document.createElement("div");
   p.className = "petal";
-
-  const size = 12 + Math.random() * 18;
-  p.style.width = size + "px";
-  p.style.height = size + "px";
+  p.innerText = "🌸";
 
   p.style.left = Math.random() * 100 + "vw";
-  p.style.animationDuration = (5 + Math.random() * 6) + "s";
-  p.style.transform = `rotate(${Math.random() * 360}deg)`;
+  p.style.fontSize = (14 + Math.random() * 12) + "px";
+  p.style.animationDuration = (4 + Math.random() * 4) + "s";
 
   document.body.appendChild(p);
-  setTimeout(() => p.remove(), 12000);
-}, 120);
 
-/* floating messages */
-function spawnMsg(){
-  const m = document.createElement("div");
-  m.className = "float-msg";
-  m.innerText = ["sorry 😢", "I’m really sorry 😭"][Math.floor(Math.random()*2)];
-  m.style.left = Math.random() * 80 + "vw";
-  m.style.top = (60 + Math.random() * 30) + "vh";
-  document.body.appendChild(m);
-  setTimeout(() => m.remove(), 5000);
+  setTimeout(() => p.remove(), 9000);
 }
 
-setInterval(spawnMsg, 2500);
+setInterval(createPetal, 200);
 
 </script>
 
