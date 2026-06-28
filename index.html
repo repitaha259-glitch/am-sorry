@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Will you give me another chance?</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
@@ -19,7 +20,6 @@ body {
   animation: gradientMove 12s ease infinite;
 }
 
-/* readability overlay */
 body::before {
   content: "";
   position: fixed;
@@ -34,7 +34,7 @@ body::before {
   100% { background-position: 0% 50%; }
 }
 
-/* 🌙 moon */
+/* moon */
 .moon {
   position: absolute;
   top: 40px;
@@ -53,54 +53,7 @@ body::before {
   50% { transform: translateY(10px); }
 }
 
-/* 🌸 PETALS */
-.petal {
-  position: absolute;
-  top: -20px;
-  width: 18px;
-  height: 18px;
-  background-image: url("https://pngimg.com/uploads/petals/petals_PNG114.png");
-  background-size: cover;
-  opacity: 0.9;
-
-  filter: drop-shadow(0 0 6px rgba(255, 182, 193, 0.9))
-          drop-shadow(0 0 12px rgba(255, 105, 180, 0.6));
-
-  animation: fall linear forwards;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-10vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% { opacity: 1; }
-  50% {
-    transform: translateY(50vh) translateX(40px) rotate(180deg);
-  }
-  100% {
-    transform: translateY(110vh) translateX(-40px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* 💧 droplets */
-.drop {
-  position: absolute;
-  width: 6px;
-  height: 14px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
-  animation: drip linear forwards;
-}
-
-@keyframes drip {
-  from { transform: translateY(-10px); opacity: 0; }
-  10% { opacity: 1; }
-  to { transform: translateY(120vh); opacity: 0; }
-}
-
-/* 💎 box */
+/* box */
 .box {
   position: absolute;
   top: 50%;
@@ -121,45 +74,30 @@ body::before {
   border-radius: 20px;
   backdrop-filter: blur(16px);
 
-  animation: breathe 6s ease-in-out infinite;
   z-index: 2;
 }
 
-@keyframes breathe {
-  0%,100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -52%) scale(1.02); }
-}
-
-/* 🔥 TEXT FIX (BIG + CLEAR) */
-h1 {
-  margin: 0;
-  font-size: 32px;
-  line-height: 1.2;
-}
+h1 { margin: 0; font-size: 24px; }
 
 #typing {
-  min-height: 40px;
-  font-size: 20px;
-  font-weight: 500;
+  min-height: 30px;
   color: #ffe4f1;
+  font-size: 18px;
 }
 
-/* 🔘 BUTTON FIX */
+/* buttons */
 button {
-  padding: 14px 26px;
+  padding: 10px 18px;
   border: none;
-  border-radius: 30px;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
-  min-width: 120px;
-  margin: 5px;
+  font-size: 16px;
 }
 
 #yes { background: #ffb6c1; }
 #no { background: #fff; }
 
-/* 🐱 cats */
+/* cats */
 .corner-cat, .rose-cat {
   position: fixed;
   padding: 12px;
@@ -168,19 +106,13 @@ button {
   background: rgba(255,255,255,0.12);
   border-radius: 14px;
   backdrop-filter: blur(12px);
-  animation: float 5s ease-in-out infinite;
   z-index: 2;
 }
 
 .corner-cat { bottom: 20px; left: 20px; }
 .rose-cat { bottom: 20px; right: 20px; text-align: center; }
 
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* 😢 floating msgs */
+/* floating msg */
 .float-msg {
   position: absolute;
   font-size: 16px;
@@ -196,26 +128,28 @@ button {
   100% { transform: translateY(-120px); opacity: 0; }
 }
 
-/* 📱 MOBILE FIX */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 26px;
-  }
+/* petals */
+.petal {
+  position: absolute;
+  top: -20px;
+  width: 18px;
+  height: 18px;
+  background-image: url("https://pngimg.com/uploads/petals/petals_PNG114.png");
+  background-size: cover;
+  opacity: 0.9;
+  animation: fall linear forwards;
+}
 
-  #typing {
-    font-size: 18px;
-  }
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
 
-  button {
-    font-size: 16px;
-    padding: 12px 20px;
-    min-width: 100px;
-  }
-
-  .box {
-    width: 90%;
-    padding: 25px 15px;
-  }
+/* success */
+.success {
+  font-size: 18px;
+  line-height: 1.6;
 }
 </style>
 </head>
@@ -225,20 +159,20 @@ button {
 <div class="moon"></div>
 
 <div class="corner-cat">
-🐱💔 forgive this little fella boi..<br>
+🐱💔 forgive this little fella<br>
 he is very sorry 😿
 </div>
 
 <div class="rose-cat">
-🐱🌹 take these roses… 💖
+🐱🌹 take these roses 💖
 </div>
 
 <audio id="bgmusic" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6c1b2.mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6c1b2.mp3">
 </audio>
 
 <audio id="sadSound">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b9f3b8d8a.mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b9f3b8d8a.mp3">
 </audio>
 
 <button id="musicBtn" style="position:fixed;top:15px;left:15px;z-index:3;">
@@ -256,27 +190,27 @@ he is very sorry 😿
 </div>
 
 <script>
-
 const music = document.getElementById("bgmusic");
 const sad = document.getElementById("sadSound");
 
 document.getElementById("musicBtn").onclick = () => music.play();
 
-/* typing */
+/* typing effect */
 const text = "will you give me another chance? 💔";
 let i = 0;
+
 function type(){
   if(i < text.length){
     document.getElementById("typing").innerHTML += text[i++];
-    setTimeout(type,60);
+    setTimeout(type, 60);
   }
 }
 type();
 
 /* YES */
-yes.onclick = () => {
+document.getElementById("yes").onclick = () => {
   document.getElementById("box").innerHTML = `
-    <div style="font-size:18px;line-height:1.6;">
+    <div class="success">
       🌸 thank you…<br><br>
       💖 I promise I’ll do better this time<br>
       and never hurt you again
@@ -289,12 +223,14 @@ yes.onclick = () => {
   sad.play();
 };
 
-/* NO button runaway */
+/* NO */
+const no = document.getElementById("no");
+
 const noTexts = [
-"💔 please don’t say no...",
-"🥺 think about it...",
-"💖 I’ll change...",
-"🙏 one more chance..."
+  "💔 please don’t say no...",
+  "🥺 think about it...",
+  "💖 I’ll change...",
+  "🙏 one more chance..."
 ];
 
 let n = 0;
@@ -311,31 +247,35 @@ no.onclick = () => {
   sad.play();
 };
 
-/* 🌸 petals */
+/* petals */
 setInterval(() => {
   const p = document.createElement("div");
   p.className = "petal";
+
+  const size = 12 + Math.random() * 18;
+  p.style.width = size + "px";
+  p.style.height = size + "px";
 
   p.style.left = Math.random() * 100 + "vw";
   p.style.animationDuration = (5 + Math.random() * 6) + "s";
 
   document.body.appendChild(p);
   setTimeout(() => p.remove(), 12000);
-}, 200);
+}, 120);
 
-/* floating msgs */
+/* floating messages */
 function spawnMsg(){
   const m = document.createElement("div");
   m.className = "float-msg";
-  m.innerText = ["sorry 😢", "I’m really sorry 😭"][Math.floor(Math.random()*2)];
+  m.innerText = Math.random() > 0.5 ? "sorry 😢" : "I’m really sorry 😭";
   m.style.left = Math.random() * 80 + "vw";
   m.style.top = (60 + Math.random() * 30) + "vh";
+
   document.body.appendChild(m);
   setTimeout(() => m.remove(), 5000);
 }
 
 setInterval(spawnMsg, 2500);
-
 </script>
 
 </body>
