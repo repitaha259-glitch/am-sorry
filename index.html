@@ -72,7 +72,7 @@ body {
   to { transform: translateY(120vh); opacity: 0; }
 }
 
-/* 💎 box */
+/* 💎 box (FIXED SHAKING) */
 .box {
   position: absolute;
   top: 50%;
@@ -95,6 +95,8 @@ body {
   backdrop-filter: blur(14px);
 
   animation: breathe 6s ease-in-out infinite;
+
+  will-change: transform;
   overflow: hidden;
 }
 
@@ -148,20 +150,7 @@ button {
   filter: blur(6px);
 }
 
-/* 🌸 fade in */
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 1.2s forwards;
-}
-.fade1 { animation-delay: 0.3s; }
-.fade2 { animation-delay: 0.8s; }
-.fade3 { animation-delay: 1.4s; }
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-/* 🐱 cat */
+/* 🐱 cats */
 .corner-cat, .rose-cat {
   position: fixed;
   padding: 10px;
@@ -173,35 +162,27 @@ button {
   animation: float 5s ease-in-out infinite;
 }
 
-.corner-cat {
-  bottom: 20px;
-  left: 20px;
-}
-
-.rose-cat {
-  bottom: 20px;
-  right: 20px;
-  text-align: center;
-}
+.corner-cat { bottom: 20px; left: 20px; }
+.rose-cat { bottom: 20px; right: 20px; text-align: center; }
 
 @keyframes float {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
-/* eyes blink */
-.eye {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  animation: blink 3s infinite;
+/* 😢 floating messages */
+.float-msg {
+  position: absolute;
+  font-size: 16px;
+  opacity: 0.8;
+  animation: floatMsg 5s linear forwards;
+  pointer-events: none;
 }
 
-@keyframes blink {
-  0%,92%,100% { transform: scaleY(1); }
-  95% { transform: scaleY(0.1); }
+@keyframes floatMsg {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-120px); opacity: 0; }
 }
 </style>
 </head>
@@ -210,18 +191,13 @@ button {
 
 <div class="moon"></div>
 
-<!-- 🐱 apology cat -->
 <div class="corner-cat">
-  🐱💔<br>
-  forgive this little fella boi..<br>
-  she is very sorry for hurting u..<br>
-  i have scolded him 😿
+🐱💔 forgive this little fella boi..<br>
+she is very sorry 😿
 </div>
 
-<!-- 🐱🌹 rose cat -->
 <div class="rose-cat">
-  🐱🌹<br>
-  take these roses… for you 💖
+🐱🌹 take these roses… 💖
 </div>
 
 <audio id="bgmusic" loop>
@@ -234,14 +210,13 @@ button {
 
 <button id="musicBtn">🎵 Play Music</button>
 
-<div class="box fade-in fade1">
+<div class="box">
 
 <h1>Will you give me another chance? 💔</h1>
+<p id="typing"></p>
 
-<p id="typing" class="fade-in fade2"></p>
-
-<button id="yes" class="fade-in fade3">Yes ❤️</button>
-<button id="no" class="fade-in fade3">No 😢</button>
+<button id="yes">Yes ❤️</button>
+<button id="no">No 😢</button>
 
 <h2 id="msg"></h2>
 
@@ -258,7 +233,7 @@ document.getElementById("musicBtn").onclick = () => music.play();
 const text = "will you give me another chance? 💔";
 let i = 0;
 function type(){
-if(i<text.length){
+if(i < text.length){
 document.getElementById("typing").innerHTML += text[i++];
 setTimeout(type,60);
 }}
@@ -277,46 +252,64 @@ no.style.display="none";
 };
 
 /* NO loop */
-const noTexts=[
+const noTexts = [
 "💔 please don’t say no...",
 "🥺 think about it...",
 "💖 I’ll change...",
 "🙏 one more chance..."
 ];
-let n=0;
+
+let n = 0;
 
 no.onclick = () => {
 no.innerText = noTexts[n];
-n=(n+1)%noTexts.length;
+n = (n + 1) % noTexts.length;
 
-no.style.position="absolute";
-no.style.left=Math.random()*80+"vw";
-no.style.top=Math.random()*80+"vh";
+no.style.position = "absolute";
+no.style.left = Math.random() * 80 + "vw";
+no.style.top = Math.random() * 80 + "vh";
 
-sad.currentTime=0;
+sad.currentTime = 0;
 sad.play();
 };
 
 /* petals */
-setInterval(()=>{
-const p=document.createElement("div");
-p.className="petal";
-p.innerHTML="🌸";
-p.style.left=Math.random()*100+"vw";
-p.style.animationDuration=(5+Math.random()*5)+"s";
+setInterval(() => {
+const p = document.createElement("div");
+p.className = "petal";
+p.innerHTML = "🌸";
+p.style.left = Math.random() * 100 + "vw";
+p.style.animationDuration = (5 + Math.random() * 5) + "s";
 document.body.appendChild(p);
-setTimeout(()=>p.remove(),10000);
-},300);
+setTimeout(() => p.remove(), 10000);
+}, 300);
 
 /* droplets */
-setInterval(()=>{
-const d=document.createElement("div");
-d.className="drop";
-d.style.left=Math.random()*100+"%";
-d.style.animationDuration=(3+Math.random()*4)+"s";
+setInterval(() => {
+const d = document.createElement("div");
+d.className = "drop";
+d.style.left = Math.random() * 100 + "%";
+d.style.animationDuration = (3 + Math.random() * 4) + "s";
 document.querySelector(".box").appendChild(d);
-setTimeout(()=>d.remove(),8000);
-},500);
+setTimeout(() => d.remove(), 8000);
+}, 500);
+
+/* 😢 floating sorry messages */
+function spawnMsg(){
+const m = document.createElement("div");
+m.className = "float-msg";
+
+const texts = ["sorry 😢", "I’m really sorry 😭"];
+m.innerText = texts[Math.floor(Math.random() * texts.length)];
+
+m.style.left = Math.random() * 80 + "vw";
+m.style.top = (60 + Math.random() * 30) + "vh";
+
+document.body.appendChild(m);
+setTimeout(() => m.remove(), 5000);
+}
+
+setInterval(spawnMsg, 2500);
 
 </script>
 
