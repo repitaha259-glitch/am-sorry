@@ -95,7 +95,6 @@ body {
   backdrop-filter: blur(14px);
 
   animation: breathe 6s ease-in-out infinite;
-  will-change: transform;
   overflow: hidden;
 }
 
@@ -274,31 +273,28 @@ setTimeout(type,60);
 }}
 type();
 
-/* YES FIXED */
+/* YES FIXED (READABLE + NO WHITE SCREEN) */
 yes.onclick = () => {
 
-document.body.style.background =
-"linear-gradient(120deg,#ff9a9e,#fad0c4,#fff1a8)";
+  const box = document.querySelector(".box");
 
-const box = document.querySelector(".box");
+  box.innerHTML = `
+    <div style="
+      background: rgba(255,255,255,0.18);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      line-height: 1.6;
+    ">
+      🌅 I promise this time I’m gonna give it my all<br><br>
+      💖 I’m really sorry for all the hurt I caused you<br><br>
+      🌸 Thank you for giving me a chance
+    </div>
+  `;
 
-box.innerHTML = `
-  <div style="
-    background: rgba(255,255,255,0.85);
-    color: #2b2b2b;
-    padding: 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    line-height: 1.6;
-  ">
-    🌅 I promise this time I’m gonna give it my all<br><br>
-    💖 I’m really sorry for all the hurt I caused you<br><br>
-    🌸 Thank you for giving me a chance
-  </div>
-`;
-
-yes.style.display="none";
-no.style.display="none";
+  yes.style.display="none";
+  no.style.display="none";
 };
 
 /* NO LOOP */
