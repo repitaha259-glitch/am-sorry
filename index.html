@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Heart A Animation</title>
+<title>I Love U Arabi ❤️</title>
 
 <style>
 *{
@@ -12,117 +12,191 @@
 }
 
 body{
-    background:#000;
+    height:100vh;
     overflow:hidden;
+    background:
+    radial-gradient(circle at top,#3b003b,#000 70%);
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
     font-family:Arial, sans-serif;
 }
 
-#ui{
-    position:relative;
-    width:700px;
-    height:700px;
-}
-
-.love_word{
+/* Floating words background */
+.word{
     position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    color:#ff80bf;
-    font-size:14px;
+    color:rgba(255,105,180,0.25);
+    font-size:18px;
+    animation:float 10s linear infinite;
     white-space:nowrap;
-    text-shadow:
-        0 0 5px #fff,
-        0 0 10px #ff80bf,
-        0 0 20px #ff80bf;
-    pointer-events:none;
 }
 
-.center-letter{
+@keyframes float{
+    0%{
+        transform:translateY(110vh) rotate(0deg);
+        opacity:0;
+    }
+    20%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-20vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+
+/* Stars */
+.star{
     position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    color:#ff4da6;
-    font-size:90px;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.2;
+        transform:scale(.5);
+    }
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+
+/* Heart */
+.heart{
+    width:220px;
+    height:220px;
+    background:#ff1744;
+    position:relative;
+    transform:rotate(-45deg);
+    animation:beat 1.2s infinite;
+    box-shadow:
+    0 0 40px #ff1744,
+    0 0 80px #ff1744;
+}
+
+
+.heart:before,
+.heart:after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    background:#ff1744;
+    border-radius:50%;
+}
+
+.heart:before{
+    top:-110px;
+    left:0;
+}
+
+.heart:after{
+    left:110px;
+    top:0;
+}
+
+
+@keyframes beat{
+    0%,100%{
+        transform:rotate(-45deg) scale(1);
+    }
+    50%{
+        transform:rotate(-45deg) scale(1.12);
+    }
+}
+
+
+/* Text inside heart */
+.text{
+    position:absolute;
+    z-index:5;
+    transform:rotate(45deg);
+    width:260px;
+    text-align:center;
+    left:-20px;
+    top:80px;
+    color:white;
+    font-size:28px;
     font-weight:bold;
     text-shadow:
-        0 0 20px #fff,
-        0 0 40px #ff4da6,
-        0 0 70px #ff4da6;
-    z-index:1000;
+    0 0 10px white,
+    0 0 20px pink;
 }
+
+.small{
+    display:block;
+    font-size:15px;
+    margin-top:10px;
+    font-weight:normal;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div id="ui"></div>
 
+<!-- Floating Love Words -->
 <script>
-const container = document.getElementById("ui");
-const text = "I love you";
 
-// Heart formula
-function heart(t){
-    return{
-        x:16*Math.pow(Math.sin(t),3),
-        y:-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))
-    };
+for(let i=0;i<40;i++){
+
+let word=document.createElement("div");
+
+word.className="word";
+word.innerHTML="I love u Arabi ❤️";
+
+word.style.left=Math.random()*100+"%";
+word.style.animationDuration=(5+Math.random()*8)+"s";
+word.style.animationDelay=Math.random()*10+"s";
+word.style.fontSize=(12+Math.random()*18)+"px";
+
+document.body.appendChild(word);
+
 }
 
-const words=[];
-const total=220;
 
-// Create words
-for(let i=0;i<total;i++){
+// Stars
 
-    const div=document.createElement("div");
-    div.className="love_word";
-    div.textContent=text;
+for(let i=0;i<100;i++){
 
-    container.appendChild(div);
+let star=document.createElement("div");
 
-    words.push({
-        el:div,
-        offset:(Math.PI*2/total)*i
-    });
+star.className="star";
+
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+star.style.animationDelay=Math.random()*2+"s";
+
+document.body.appendChild(star);
+
 }
-
-// Center letter
-const center=document.createElement("div");
-center.className="center-letter";
-center.textContent="A";
-container.appendChild(center);
-
-let angle=0;
-
-function animate(){
-
-    angle+=0.008;
-
-    words.forEach(w=>{
-
-        const t=w.offset+angle;
-
-        const p=heart(t);
-
-        const x=p.x*15;
-        const y=p.y*15;
-
-        w.el.style.transform=`translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-    });
-
-    requestAnimationFrame(animate);
-}
-
-animate();
 
 </script>
+
+
+
+<div class="heart">
+
+<div class="text">
+    I Love U
+    <br>
+    Arabi ❤️
+    <span class="small">
+        Forever & Always
+    </span>
+</div>
+
+</div>
+
 
 </body>
 </html>
