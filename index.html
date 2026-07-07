@@ -3,83 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <title>Heart A Animation</title>
+
 <style>
-body {
-margin: 0;
-background: black;
-overflow: hidden;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-font-family: Arial, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-#ui {
-position: relative;
+
+body{
+    background:#000;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial, sans-serif;
 }
-.love_word {
-position: absolute;
-color: #ea80b0;
-font-size: 14px;
-text-shadow: 0 0 10px #fff;
-white-space: nowrap;
-pointer-events: none;
+
+#ui{
+    position:relative;
+    width:700px;
+    height:700px;
 }
-/* Ортодогу A */
-.center-letter {
-position: absolute;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-color: #ff4da6;
-font-size: 80px;
-font-weight: bold;
-text-shadow: 0 0 20px #fff, 0 0 40px #ff4da6;
-pointer-events: none;
+
+.love_word{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    color:#ff80bf;
+    font-size:14px;
+    white-space:nowrap;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #ff80bf,
+        0 0 20px #ff80bf;
+    pointer-events:none;
+}
+
+.center-letter{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    color:#ff4da6;
+    font-size:90px;
+    font-weight:bold;
+    text-shadow:
+        0 0 20px #fff,
+        0 0 40px #ff4da6,
+        0 0 70px #ff4da6;
+    z-index:1000;
 }
 </style>
 </head>
+
 <body>
+
 <div id="ui"></div>
+
 <script>
 const container = document.getElementById("ui");
 const text = "I love you";
-// жүрөк формуласы
-function heart(t) {
-return {
-x: 16 * Math.pow(Math.sin(t), 3),
-y: -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t))
-};
+
+// Heart formula
+function heart(t){
+    return{
+        x:16*Math.pow(Math.sin(t),3),
+        y:-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))
+    };
 }
-// сөздөр
-let words = [];
-for (let i = 0; i < 200; i++) {
-let el = document.createElement("div");
-el.className = "love_word";
-el.innerText = text;
-container.appendChild(el);
-words.push({
-el: el,
-t: Math.random() * Math.PI * 2
-});
+
+const words=[];
+const total=220;
+
+// Create words
+for(let i=0;i<total;i++){
+
+    const div=document.createElement("div");
+    div.className="love_word";
+    div.textContent=text;
+
+    container.appendChild(div);
+
+    words.push({
+        el:div,
+        offset:(Math.PI*2/total)*i
+    });
 }
-// ортодогу A
-const letter = document.createElement("div");
-letter.className = "center-letter";
-letter.innerText = "A";
-container.appendChild(letter);
-// анимация (жайлатылган)
-function animate() {
-words.forEach(w => {
-w.t += 0.008; // ылдамдык (жай)
-let p = heart(w.t);
-let x = p.x * 15;
-let y = p.y * 15;
-w.el.style.transform = `translate(${x}px, ${y}px)`;
-});
-requestAnimationFrame(animate);
+
+// Center letter
+const center=document.createElement("div");
+center.className="center-letter";
+center.textContent="A";
+container.appendChild(center);
+
+let angle=0;
+
+function animate(){
+
+    angle+=0.008;
+
+    words.forEach(w=>{
+
+        const t=w.offset+angle;
+
+        const p=heart(t);
+
+        const x=p.x*15;
+        const y=p.y*15;
+
+        w.el.style.transform=`translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    });
+
+    requestAnimationFrame(animate);
 }
+
 animate();
+
 </script>
+
 </body>
-</html> -
+</html>
